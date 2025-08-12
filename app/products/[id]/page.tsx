@@ -6,10 +6,14 @@ import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
 import AddToCart from '@/components/single-product/AddToCart';
 import ProductRating from '@/components/single-product/ProductRating';
 
-const SingleProductPage = async ({ params }: { params: { id: string } }) => {
-  const product = await fetchSingleProduct(params.id);
+type PageProps = {
+  params: Promise<{ id: string }>;
+};
+
+const SingleProductPage = async ({ params }: PageProps) => {
+  const { id } = await params;
+  const product = await fetchSingleProduct(id);
   const { name, image, company, description, price } = product;
-  console.log(image);
 
   const dollarAmount = formatCurrency(price);
   return (
@@ -23,15 +27,16 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
             alt={name}
             sizes="(max-width:768px) 100vw, (min-width:1200px) 50vw, 30vw"
             className="w-full rounded object-cover"
+            priority
           />
         </div>
         {/* Product info */}
         <div className="div">
           <div className="flex gap-x-8 items-center">
             <h1 className="capitalize text-3xl font-bold">{name}</h1>
-            <FavoriteToggleButton productId={params.id} />
+            <FavoriteToggleButton productId={id} />
           </div>
-          <ProductRating productId={params.id} />
+          <ProductRating productId={id} />
           <h4 className="text-xl mt-1">{company}</h4>
           <p className="mt-1 text-md rounded">{dollarAmount}</p>
           <p className="mt-6 leading-8 text-muted-foreground">{description}</p>
