@@ -12,8 +12,14 @@ import { links } from '@/utilis/links';
 import UserIcon from './UserIcon';
 import { SignedOut, SignedIn, SignInButton, SignUpButton } from '@clerk/nextjs';
 import SignOutLink from './SignOutLink';
+import { auth } from '@clerk/nextjs/server';
 
-const LinksDropdown = () => {
+//temporarily solution - refactoring - state managmenet
+
+const LinksDropdown = async () => {
+  const { userId } = await auth();
+  const isAdmin = userId === process.env.ADMIN_USER_ID;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,7 +32,7 @@ const LinksDropdown = () => {
         <SignedOut>
           <DropdownMenuItem>
             <SignInButton mode="modal">
-              <button className="w-full text-left">Login In</button>
+              <button className="w-full text-left">Login </button>
             </SignInButton>
           </DropdownMenuItem>
           <DropdownMenuItem>
@@ -37,6 +43,9 @@ const LinksDropdown = () => {
         </SignedOut>
         <SignedIn>
           {links.map((link) => {
+            if (link.label === 'Dasboards' && !isAdmin) {
+              return null;
+            }
             return (
               <DropdownMenuItem key={link.href}>
                 <Link href={link.href} className="capitalize">
