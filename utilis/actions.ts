@@ -146,7 +146,9 @@ export const updateProductAction = async (
     revalidatePath(`/admin/products/${productId}/edit`);
     return { message: 'product updated' };
   } catch (error) {
-    renderError(error);
+    const message = renderError(error);
+
+    return { message: message ?? 'An unexpected error occurred' };
   }
 };
 export const updateProductImageAction = async (

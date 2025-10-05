@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { actionFunction } from '@/utilis/types';
 import { toast } from 'sonner';
 
