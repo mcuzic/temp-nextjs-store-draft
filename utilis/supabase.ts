@@ -1,5 +1,3 @@
-'use server';
-
 import { createClient } from '@supabase/supabase-js';
 
 const bucket = 'mian-bucket';
@@ -22,5 +20,5 @@ export const uploadImage = async (image: File) => {
 export const deleteImage = async (url: string) => {
   const imageName = url.split('/').pop();
   if (!imageName) throw new Error('Invalid URL');
-  return await supabase.storage.from(bucket).remove([imageName]);
+  return supabase.storage.from(bucket).remove([imageName]);
 };

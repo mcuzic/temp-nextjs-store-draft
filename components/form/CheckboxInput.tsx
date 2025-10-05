@@ -11,8 +11,6 @@ const CheckboxInput = ({
   label,
   defaultChecked = false,
 }: CheckboxInputProps) => {
-  console.log(name);
-
   return (
     <div className="flex items-center space-x-2">
       <Checkbox id={name} name={name} defaultChecked={defaultChecked} />
