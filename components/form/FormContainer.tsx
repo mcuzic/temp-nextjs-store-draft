@@ -2,7 +2,6 @@
 
 import { useActionState } from 'react';
 import { useEffect, useState } from 'react';
-import { Toaster } from '@/components/ui/sonner';
 import { actionFunction } from '@/utilis/types';
 import { toast } from 'sonner';
 
