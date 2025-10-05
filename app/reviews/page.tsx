@@ -4,14 +4,14 @@ import SectionTitle from '@/components/global/SectionTitle';
 import ReviewCard from '@/components/reviews/ReviewCard';
 import {
   deleteReviewAction,
-  // fetchProductReviewsByUser,
+  fetchProductReviewsByUser,
 } from '@/utilis/actions';
 
 const ReviewsPage = async () => {
-  // const reviews = await fetchProductReviewsByUser();
-  // if (reviews.length === 0) {
-  //   return <SectionTitle text="no reviews yet" />;
-  // }
+  const reviews = await fetchProductReviewsByUser();
+  if (reviews.length === 0) {
+    return <SectionTitle text="no reviews yet" />;
+  }
 
   return (
     <>
