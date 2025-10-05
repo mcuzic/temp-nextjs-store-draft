@@ -112,7 +112,7 @@ export const deleteProductAction = async (prevState: { productId: string }) => {
     revalidatePath('/admin/products');
     return { message: 'product removed' };
   } catch (error) {
-    renderError(error);
+    return renderError(error);
   }
 };
 export const fetchAdminProductDetails = async (productId: string) => {
@@ -249,7 +249,7 @@ export const createReviewAction = async (
     revalidatePath(`/products/${validatedFields.productId}`);
     return { message: 'review submited sucessfully' };
   } catch (error) {
-    renderError(error);
+    return renderError(error);
   }
 };
 
