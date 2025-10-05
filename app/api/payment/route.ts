@@ -1,7 +1,12 @@
 import { NextRequest } from 'next/server';
 import Stripe from 'stripe';
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+
 import db from '@/utilis/db';
+
+const STRIPE_SECRET_KEY =
+  'sk_test_51SCQMK3UUlRCXqn2AVsdbAyQae0IgBTNS17zPmNJKqUgnS6EcbSS6v6GEEWdyj6kud8Nzdtia5tmWGmgVBYvlVYP00YuEX2VQr';
+
+const stripe = new Stripe(STRIPE_SECRET_KEY as string);
 
 export const POST = async (req: NextRequest) => {
   const requestHeaders = new Headers(req.headers);
