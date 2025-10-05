@@ -1,5 +1,3 @@
-import { PageProps } from 'next';
-
 import {
   fetchAdminProductDetails,
   updateProductAction,
@@ -13,7 +11,13 @@ import CheckboxInput from '@/components/form/CheckboxInput';
 import TextArea from '@/components/form/TextArea';
 import ImageInputContainer from '@/components/form/ImageInputContainer';
 
-const EditProductPage = async ({ params }: { params: { id: string } }) => {
+interface EditProductPageProps {
+  params: {
+    id: string;
+  };
+}
+
+const EditProductPage = async ({ params }: EditProductPageProps) => {
   const { id } = params;
   const product = await fetchAdminProductDetails(id);
   const { name, company, description, featured, price } = product;
