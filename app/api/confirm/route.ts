@@ -1,9 +1,14 @@
 import Stripe from 'stripe';
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+
 import { redirect } from 'next/navigation';
 
 import { type NextRequest } from 'next/server';
 import db from '@/utilis/db';
+
+const STRIPE_SECRET_KEY =
+  'sk_test_51SCQMK3UUlRCXqn2AVsdbAyQae0IgBTNS17zPmNJKqUgnS6EcbSS6v6GEEWdyj6kud8Nzdtia5tmWGmgVBYvlVYP00YuEX2VQr';
+
+const stripe = new Stripe(STRIPE_SECRET_KEY as string);
 
 export const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
@@ -11,7 +16,6 @@ export const GET = async (req: NextRequest) => {
 
   try {
     const session = await stripe.checkout.sessions.retrieve(session_id);
-    // console.log(session);
 
     const orderId = session.metadata?.orderId;
     const cartId = session.metadata?.cartId;
