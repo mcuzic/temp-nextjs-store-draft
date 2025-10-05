@@ -1,3 +1,5 @@
+import { PageProps } from 'next';
+
 import {
   fetchAdminProductDetails,
   updateProductAction,
